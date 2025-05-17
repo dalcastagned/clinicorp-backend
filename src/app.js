@@ -1,26 +1,26 @@
-require('dotenv').config(); 
-const express = require('express');
-const allRoutes = require('./routes');
-const errorHandler = require('./middlewares/errorHandler');
-const { StatusCodes } = require('http-status-codes');
+require('dotenv').config()
+const express = require('express')
+const allRoutes = require('./routes')
+const errorHandler = require('./middlewares/errorHandler')
+const { StatusCodes } = require('http-status-codes')
 
-const app = express();
+const app = express()
 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.use('/', allRoutes);
+app.use('/', allRoutes)
 
 app.get('/', (_, res) => {
-  res.status(StatusCodes.OK).json({ message: 'Servidor de Tarefas no ar!' });
-});
+  res.status(StatusCodes.OK).json({ message: 'Servidor de Tarefas no ar!' })
+})
 
 app.use((_, __, next) => {
-  const error = new Error('Rota não encontrada.');
-  error.statusCode = StatusCodes.NOT_FOUND;
-  next(error);
-});
+  const error = new Error('Rota não encontrada.')
+  error.statusCode = StatusCodes.NOT_FOUND
+  next(error)
+})
 
-app.use(errorHandler);
+app.use(errorHandler)
 
-module.exports = app;
+module.exports = app

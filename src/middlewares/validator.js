@@ -1,5 +1,5 @@
-const Joi = require('joi');
-const { StatusCodes } = require('http-status-codes');
+const Joi = require('joi')
+const { StatusCodes } = require('http-status-codes')
 
 const taskSchema = Joi.object({
   description: Joi.string().min(3).required().messages({
@@ -17,25 +17,25 @@ const taskSchema = Joi.object({
     'any.required': 'O campo status é obrigatório',
     'string.base': 'O campo status deve ser um texto',
   }),
-});
+})
 
 const insertTasksSchema = Joi.array().items(taskSchema).min(1).required().messages({
   'array.base': 'A lista de tarefas deve ser um array',
   'array.min': 'É necessário enviar pelo menos uma tarefa',
   'any.required': 'O corpo da requisição é obrigatório',
-});
+})
 
 const validateInsertTasks = (req, res, next) => {
-  const { error } = insertTasksSchema.validate(req.body);
+  const { error } = insertTasksSchema.validate(req.body)
   if (error) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: 'Erro de validação.',
       details: error.details.map(d => d.message).join(', '),
-    });
+    })
   }
-  next();
-};
+  next()
+}
 
 module.exports = {
   validateInsertTasks,
-};
+}

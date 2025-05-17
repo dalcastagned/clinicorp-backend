@@ -1,10 +1,10 @@
-const express = require('express');
-const taskController = require('../controllers/taskController');
-const { validateInsertTasks } = require('../middlewares/validator');
+const express = require('express')
+const taskController = require('../controllers/taskController')
+const { validateInsertTasks } = require('../middlewares/validator')
 
-const router = express.Router();
+const router = express.Router()
 
-router.post('/insert-tasks', validateInsertTasks, taskController.handleCreateTasks);
-router.get('/get-tasks', taskController.handleGetAllTasks);
+router.post('/insert-tasks', validateInsertTasks, taskController.handleCreateTasks)
+router.get('/get-tasks', taskController.handleGetAllTasks)
 
-module.exports = router;
+module.exports = router

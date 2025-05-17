@@ -1,20 +1,18 @@
-const admin = require('firebase-admin');
-require('dotenv').config();
+const admin = require('firebase-admin')
+require('dotenv').config()
 
 try {
   if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    throw new Error('A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não está definida.');
+    throw new Error('A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não está definida.')
   }
 
-  if (!admin.apps.length) { 
-     admin.initializeApp();
+  if (!admin.apps.length) {
+    admin.initializeApp()
   }
-
-
 } catch (error) {
-  console.error('Falha ao inicializar o Firebase Admin SDK:', error);
+  console.error('Falha ao inicializar o Firebase Admin SDK:', error)
 }
 
-const db = admin.firestore();
+const db = admin.firestore()
 
-module.exports = { db, admin };
+module.exports = { db, admin }
