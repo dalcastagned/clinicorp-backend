@@ -11,6 +11,16 @@ async function handleCreateTasks(req, res, next) {
   }
 }
 
+async function handleGetAllTasks(_, res, next) {
+  try {
+    const tasks = await taskService.getAllTasks();
+    res.status(StatusCodes.OK).json(tasks);
+  } catch (error) {
+    next(error); 
+  }
+}
+
 module.exports = {
   handleCreateTasks,
+  handleGetAllTasks,
 };

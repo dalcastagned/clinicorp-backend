@@ -30,6 +30,20 @@ async function createTasks(tasksData) {
   return savedTasks;
 }
 
+async function getAllTasks() {
+  const snapshot = await db.collection(TASKS_COLLECTION).orderBy('createdAt', 'desc').get();
+  if (snapshot.empty) {
+    return [];
+  }
+  const tasks = [];
+  snapshot.forEach(doc => {
+    const {createdAt, ...taskData} = doc.data();
+    tasks.push({ id: doc.id, ...taskData });
+  });
+  return tasks;
+}
+
 module.exports = {
   createTasks,
+  getAllTasks,
 };
